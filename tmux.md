@@ -63,6 +63,32 @@ new-window -n processes "top"
 ## help
 `<prefix>-?`
 
+## scroll
+`<prefix>-PgUp/PgDown`
+
+## copy mode and search
+`<prefix>-[` enters copy mode
+`Enter` exits copy mode
+`Ctrl-Space` select
+`Ctrl-w` copy
+`<prefix>-]` paste
+
+`?` search upwards; `n` - next, `N` - previous
+`/` search downward; `n` - next, `N` - previous
+
+## copy visible pane text
+`:capture-pane`
+
+Save to a file `:capture-pane,save-buffer buffer.txt`
+
+## copy buffers
+```
+list-buffers
+choose-buffer 2
+# paste
+<prefix>-]
+```
+
 ## configuration
 Reload `source-file ~/.tmux.conf`
 
@@ -118,4 +144,7 @@ bind -r H resize-pane -L 5
 bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
+
+# enable vi keys in copy mode
+setw -g mode-keys vi
 ```
