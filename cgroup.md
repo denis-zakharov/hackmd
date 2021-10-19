@@ -29,3 +29,14 @@ What can be controlled?
 - RDMA
 - unified
 
+A single process can be controlled by many groups.
+`/sys/fs/cgroup/memory/foo/`
+- cgroup.procs
+- memory.usage_in_bytes
+
+Other defaults to `/sysdefault`.
+
+**libcgroup**
+- cgset, cgcreate, cgexec
+
+Linux namespaces can be controlled by cgroups.
