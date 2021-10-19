@@ -29,14 +29,44 @@ What can be controlled?
 - RDMA
 - unified
 
-A single process can be controlled by many groups.
-`/sys/fs/cgroup/memory/foo/`
-- cgroup.procs
-- memory.usage_in_bytes
-
-Other defaults to `/sysdefault`.
-
 **libcgroup**
 - cgset, cgcreate, cgexec
 
 Linux namespaces can be controlled by cgroups.
+
+**What is the problem we are trying to solve?**
+
+- Core workload
+- Non-core: monitoring, cron, Chef/Ansible, atop
+- Ad-hoc debug: tcpdump, atop
+
+# cgroup v1 vs v2
+
+cgroups per resource vs resources per cgroup.
+
+**v1**
+A hierarchy per resource `/sys/fs/cgroup/`
+- cpu
+- memory
+- etc
+
+Each resource hierarchy contains cgroups
+for this resource.
+
+Cgroups can be nested.
+
+For each pid we should decide where to it.
+
+Thus, a single pid can be assigned to many cgroups of different resources.
+
+**v2**
+
+A *unified* hierarchy.
+
+A bunch of cgroups at the root `/sys/fs/cgroup/`
+
+Each cgroup controlls all types of resources.
+
+Still, cgroups can be nested.
+
+Why v2? We sacrifice granularity in favor of simplicity.
