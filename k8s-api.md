@@ -46,3 +46,11 @@ k get --raw /apis/batch/v1 | jq
 k get --raw /apis/batch/v1beta1
 k get --raw /apis/helm.openshift.io/v1beta1
 ```
+
+## Request processing
+
+```
+HTTP   __ auth& __ Mutating  __Object     __Validating __Persist
+handler   authz    admission   schema       admission    to etcd
+                   +webhooks   validation   +webhooks
+```
