@@ -54,3 +54,24 @@ HTTP   __ auth& __ Mutating  __Object     __Validating __Persist
 handler   authz    admission   schema       admission    to etcd
                    +webhooks   validation   +webhooks
 ```
+
+## API Client Building Blocks
+
+### go-client https://github.com/kubernetes/client-go
+Implements HTTP interface of the API server with usual verbs like `Get()`, `Put()` and also `Watch()`.
+
+While all packages have their use, most of your code that speaks to Kubernetes APIs will use `tools/clientcmd/`
+to set up a client from a kubeconfig file and `kubernetes/` for the actual Kubernetes API clients.
+
+### API types https://github.com/kubernetes/api
+
+Resources types definitions. For example, core API objects are defined in
+[core/v1/types.go](https://github.com/kubernetes/api/blob/master/core/v1/types.go)
+
+### API Machinery
+
+All generic building blocks to implement Kubernetes-like API. This is not restricted
+to container management and can be used to build a generic business API.
+
+An important package for k8s api clients is `k8s.io/apimachinery/pkg/apis/meta/v1`. It contains
+many of the generic API types such as `ObjectMeta`, `TypeMeta`, `GetOptions`, and `ListOptions`.
