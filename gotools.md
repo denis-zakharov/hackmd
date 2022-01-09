@@ -69,3 +69,54 @@ go tool cover -html=c.out // open report in browser
 ```
 
 ## Benchmarks
+
+### Test object `testing.B`
+A basic benchmark.
+```go=
+var blackhole int
+
+func BenchmarkFileLen(b *testing.B) {
+    for i:=0; i<b.N; i++ {
+        result, err := FileLen("testdata.txt", 1)
+        if err != nil {
+            b.Fatal(err)
+        }
+        blackhole = result
+    }
+}
+```
+
+Run benchmark with different arguments.
+```go=
+func BenchmarkFileLen(b *testing.B) {
+    for _, v := range []int{1, 10, 100, 1000, 10000, 100000} {
+        b.Run(fmt.Sprintf("FileLen-%d", v), func(b *testing.B) {
+            for i := 0; i < b.N; i++ {
+                result, err := FileLen("testdata.txt", v)
+                if err != nil {
+                    b.Fatal(err)
+                }
+                blackhole = result
+            }
+        })
+    }
+}
+```
+
+### Commands
+```
+go test -bench=. -benchmem
+go test -bench=<bench func regex>
+```
+
+Output examle:
+```
+BenchmarkFileLen-12  25  47201025 ns/op  65342 B/op  65208 allocs/op
+
+BenchmarkFileLen-12 == <name>-<GOMAXPROCS>
+25 == no. of time the test ran.
+
+// b.Run
+BenchmarkFileLen/FileLen-10-12
+BenchmarkFileLen/<b.Run prefix>-<GOMAXPROCS>
+```
