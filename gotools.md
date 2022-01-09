@@ -4,6 +4,7 @@
 
 ### Commands
 ```
+go test -run=Example
 go test -timeout 30s -race
 go test -count=1 // no caching
 ```
@@ -120,3 +121,20 @@ BenchmarkFileLen-12 == <name>-<GOMAXPROCS>
 BenchmarkFileLen/FileLen-10-12
 BenchmarkFileLen/<b.Run prefix>-<GOMAXPROCS>
 ```
+
+## Profiling
+[Profiling a Go Program](https://pkg.go.dev/runtime/pprof)
+
+Adhoc profiling using a benchmark.
+```
+go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
+go tool pprof cpu.prof
+```
+
+Must-know commands:
+- top
+- web
+- help
+
+Runtime profiling usually performed by instrumenting the code
+and calling an http endpoint to trigger the pprof.
