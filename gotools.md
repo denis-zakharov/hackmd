@@ -129,6 +129,7 @@ Adhoc profiling using a benchmark.
 ```
 go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
 go tool pprof cpu.prof
+go tool pprof -http :8080 program.test cpu.prof
 ```
 
 Must-know commands:
