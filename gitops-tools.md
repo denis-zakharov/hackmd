@@ -1,4 +1,6 @@
-# Anthos Config Management
+# GitOps Tools Comparison
+
+## Anthos Config Management
 Anthos Config Management is especially suited to deploy configurations,
 policies, and workloads **needed to run the platform that you build
 on top of Anthos** — for example, security agents, monitoring agents,
@@ -14,11 +16,11 @@ so that application teams can be in charge of their release schedule.
 ACM Staged rollouts - cluster per cluster or namespace per namespace.
 
 
-# GitOps Tools
+## GitOps Tools
 
 [FluxCD vs ArgoCD](https://thenewstack.io/gitops-on-kubernetes-deciding-between-argo-cd-and-flux/)
 
-## Similarities
+### Similarities
 
 - **Secrets**. Bitnami sealed-secrets controller with SealedSecret CRD,
   enctypt in Git using a public key provided by the controller.
@@ -28,7 +30,7 @@ ACM Staged rollouts - cluster per cluster or namespace per namespace.
 - **Image Updates Automation** new or by patterns.
 - Both have a CLI to interact with APIs.
 
-## Differences
+### Differences
 
 **Install**
 - Flux: Bootstrapping a management repository.
@@ -72,7 +74,7 @@ Flux:
 - native support via Helm SDK.
 - helm controller CRDs
   * Source: HelmRepository, GitRepository (with subpaths), Bucket (s3).
-  * HelmRelease: chart, sourceRef
+  * HelmRelease: chart, sourceRef, values
 
 Argo:
 - non-native support:
