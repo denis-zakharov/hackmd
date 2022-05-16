@@ -75,6 +75,14 @@ Flux:
 - helm controller CRDs
   * Source: HelmRepository, GitRepository (with subpaths), Bucket (s3).
   * HelmRelease: chart, sourceRef, values
+    valuesFrom: ConfigMap, Secret - use with kustomize generators and nameReference
+    to trigger an update.
+    valuesFiles: inside the chart
+  * dependsOn: other HelmRelease-s.
+  * timeout
+  * install, upgrade, uninstall flags and options. For example,
+    upgrade.remediation.strategy: rollback
+  * kustomize post-renderer
 
 Argo:
 - non-native support:
@@ -84,3 +92,5 @@ Argo:
 - values files (--values)
 - parameters (--set)
 - plugins baked into a custom image or init container.
+- more granular control over manifest application from a single source:
+  hooks and sync waves.
